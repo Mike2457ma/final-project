@@ -1,5 +1,7 @@
+"use client"; // 確保在檔案頂部添加這行
+
 import { Sidebar, SidebarItem, SidebarItemGroup } from "flowbite-react";
-import { HiOutlineUser, HiOutlineMail } from "react-icons/hi"; // 修改圖標名稱
+import { HiOutlineUser, HiOutlineMail } from "react-icons/hi";
 import Link from "next/link";
 import { servers } from "../lib/data";
 
@@ -7,10 +9,10 @@ export default function Layout({ children }) {
   return (
     <div className="flex h-screen bg-gray-900 text-white">
       <Sidebar className="flex-[2] bg-gray-800 border border-gray-700 shadow-lg">
-        {/* 頂部 */}
+        {/* 頂部標題 */}
         <div className="text-lg font-bold text-white text-center py-4">HI~</div>
 
-        {/* 搜尋 bar */}
+        {/* 搜尋欄 */}
         <div className="w-4/5 px-4 mx-auto">
           <input
             type="text"
@@ -19,8 +21,8 @@ export default function Layout({ children }) {
           />
         </div>
 
-        {/* 功能圖標區域 */}
         <SidebarItemGroup>
+          {/* 直接傳遞圖標組件（不是 JSX 元素） */}
           <SidebarItem icon={HiOutlineUser}>登入/登出</SidebarItem>
           <SidebarItem icon={HiOutlineMail}>訊息</SidebarItem>
         </SidebarItemGroup>
