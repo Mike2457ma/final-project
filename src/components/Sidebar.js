@@ -1,18 +1,37 @@
 "use client";
 
 import { Sidebar, SidebarItem, SidebarItemGroup } from "flowbite-react";
-import { HiOutlineUser, HiOutlineMail } from "react-icons/hi";
+import { HiOutlineUser, HiOutlineMail, HiOutlineHome } from "react-icons/hi";
 import Link from "next/link";
 import { servers } from "@/lib/data";
-import { usePathname } from "next/navigation"; // 用於獲取當前路徑
+import { usePathname } from "next/navigation";
 
 export default function SidebarComponent() {
-  const pathname = usePathname(); // 獲取當前路徑，例如 /server/1
+  const pathname = usePathname();
 
   return (
     <Sidebar className="flex-[2] bg-gray-800 border border-gray-700 shadow-lg">
       {/* 頂部標題 */}
-      <div className="text-lg font-bold text-white text-center py-4">HI~</div>
+      <div className="text-lg font-bold text-white text-center py-4">
+        公海OnLine
+      </div>
+
+      {/* 返回首頁按鈕 */}
+      <SidebarItemGroup>
+        <Link href="/">
+          <SidebarItem
+            as="span" // 讓 Sidebar.Item 渲染為 span，避免嵌套 <a>
+            icon={HiOutlineHome}
+            className={
+              pathname === "/"
+                ? "bg-gray-700 text-white"
+                : "text-gray-300 hover:bg-gray-700"
+            }
+          >
+            返回首頁
+          </SidebarItem>
+        </Link>
+      </SidebarItemGroup>
 
       {/* 搜尋欄 */}
       <div className="w-4/5 px-4 mx-auto">
@@ -36,6 +55,7 @@ export default function SidebarComponent() {
         {servers.map((server) => (
           <Link href={`/server/${server.id}`} key={server.id}>
             <SidebarItem
+              as="span" // 同樣用 span，避免嵌套 <a>
               className={
                 pathname === `/server/${server.id}`
                   ? "bg-gray-700 text-white"
